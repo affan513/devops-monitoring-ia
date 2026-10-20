@@ -1,0 +1,27 @@
+groups:
+  - name: webapp-alerts
+    rules:
+      - alert: WebAppDown
+        expr: up{job="webapp"} == 0
+        for: 15s
+        labels: {severity: critical}
+        annotations:
+          summary: "Web app is down"
+      - alert: HighErrorRate
+        expr: sum(rate(app_http_requests_total{status=~"5.."}[1m])) / sum(rate(app_http_requests_total[1m])) > 0.2
+        for: 30s
+        labels: {severity: warning}
+        annotations:
+          summary: "More than 20% of requests are failing"
+      - alert: HighLatencyP95
+        expr: histogram_quantile(0.95, sum(rate(app_http_request_duration_seconds_bucket[1m])) by (le)) > 1
+        for: 30s
+        labels: {severity: warning}
+        annotations:
+          summary: "p95 latency above 1s"
+      - alert: HighContainerMemory
+        expr: container_memory_usage_bytes{name="webapp"} > 200 * 1024 * 1024
+        for: 30s
+        labels: {severity: warning}
+        annotations:
+          summary: "webapp container using more than 200 MB"
