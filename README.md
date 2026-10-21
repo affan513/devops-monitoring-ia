@@ -18,7 +18,7 @@ docker compose up -d --build
 | Web app    | http://localhost:5000        | /, /fast, /slow, /cpu, /memory, /error, /health, /metrics |
 | Prometheus | http://localhost:9090        | Status > Targets, Alerts |
 | cAdvisor   | http://localhost:8080        | raw container metrics    |
-| Grafana    | http://localhost:3000        | admin / admin; dashboard "Containerized Application Monitoring" is auto-provisioned |
+| Grafana    | http://localhost:3001        | admin / admin; dashboard "Containerized Application Monitoring" is auto-provisioned |
 
 Stop: `docker compose down` (add `-v` to wipe data).
 
