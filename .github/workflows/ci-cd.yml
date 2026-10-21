@@ -25,10 +25,10 @@ jobs:
         run: python -m unittest -v
       - name: Validate Prometheus config and alert rules
         run: |
-          docker run --rm --entrypoint promtool -v "$PWD/prometheus:/cfg" \
-            prom/prometheus:v2.53.0 check config /cfg/prometheus.yml
-          docker run --rm --entrypoint promtool -v "$PWD/prometheus:/cfg" \
-            prom/prometheus:v2.53.0 check rules /cfg/alert.rules.yml
+          docker run --rm --entrypoint promtool -v "$PWD/prometheus:/etc/prometheus" \
+            prom/prometheus:v2.53.0 check config /etc/prometheus/prometheus.yml
+          docker run --rm --entrypoint promtool -v "$PWD/prometheus:/etc/prometheus" \
+            prom/prometheus:v2.53.0 check rules /etc/prometheus/alert.rules.yml
       - name: Validate Docker Compose file and dashboard JSON
         run: |
           docker compose config -q
