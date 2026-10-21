@@ -41,7 +41,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Scan repository (dependencies, secrets, misconfigurations)
-        uses: aquasecurity/trivy-action@0.24.0
+        uses: aquasecurity/trivy-action@0.35.0
         with:
           scan-type: fs
           scan-ref: .
@@ -51,7 +51,7 @@ jobs:
       - name: Build web app image
         run: docker build -t webapp:ci ./app
       - name: Scan web app image
-        uses: aquasecurity/trivy-action@0.24.0
+        uses: aquasecurity/trivy-action@0.35.0
         with:
           image-ref: webapp:ci
           severity: CRITICAL
