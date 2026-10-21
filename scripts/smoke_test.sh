@@ -12,5 +12,5 @@ check_targets() {
 }
 retry check_targets
 echo "Waiting for Grafana dashboard..."
-retry curl -fsS -u admin:admin "http://localhost:3000/api/search?query=Containerized" | grep -q "Containerized Application Monitoring"
+retry curl -fsS -u admin:admin "http://localhost:3001/api/search?query=Containerized" | grep -q "Containerized Application Monitoring"
 echo "Smoke test passed."
